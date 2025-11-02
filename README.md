@@ -63,4 +63,5 @@ This project is open source and available under the [MIT License](LICENSE).
 ---
 
 **Live App:** [https://nihu791-india-census-2011-app-no0qlu.streamlit.app/](https://nihu791-india-census-2011-app-no0qlu.streamlit.app/)
+
 **Built with:** Streamlit, Plotly, Pandas, and NumPy
