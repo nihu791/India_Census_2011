@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 
-st.set_page_config(page_title = 'India Census 2011', page_icon = '🇮🇳', layout = 'wide')
+st.set_page_config(page_title='India Census 2011', page_icon='🇮🇳', layout='wide')
 
 India_census = pd.read_csv('final_df.csv')
 
@@ -18,24 +18,42 @@ second_parameter = st.sidebar.selectbox('Select Second Parameter', sorted(India_
 
 plot = st.sidebar.button('Plot Map')
 
+if not plot:
+
+    if not plot:
+        st.markdown('''## 🇮🇳 India Census 2011 Interactive Dashboard''')
+        st.markdown("""
+        - Explore and compare district-level data from the **2011 India Census**.
+        - Use the sidebar to select parameters and visualize insights across all states or a specific one.
+        - Click **Plot Map** to generate an interactive map visualization.
+        """)
+        st.markdown("---")
+
 if plot:
 
     st.markdown('''
-                - First Parameter represented by Size''')
-    st.markdown('''
-                - Second Parameter represented by Color''')
-    
+                - First Parameter represented by ***Size***
+                - Second Parameter represented by ***Color***''')
+
     if selected_state == 'All States':
 
         # plot for all states
 
-        fig = px.scatter_mapbox(India_census, lat = 'Latitude', lon = 'Longitude', zoom = 3, hover_name = 'District', hover_data = [first_parameter, second_parameter] ,mapbox_style ='carto-positron', size = first_parameter, color = second_parameter, width = 1400, height = 700, title = f'India Census 2011: {first_parameter} vs {second_parameter} for All States', size_max = 25)
+        fig = px.scatter_mapbox(India_census, lat='Latitude', lon='Longitude', zoom=3, hover_name='District',
+                                hover_data=[first_parameter, second_parameter], mapbox_style='carto-positron',
+                                size=first_parameter, color=second_parameter, width=1400, height=700,
+                                title=f'India Census 2011: {first_parameter} vs {second_parameter} for All States',
+                                size_max=25)
 
-        st.plotly_chart(fig, use_container_width = True)
+        st.plotly_chart(fig, use_container_width=True)
     else:
         # plot for selected state 
         state_data = India_census[India_census['State'] == selected_state]
 
-        fig = px.scatter_mapbox(state_data , lat = 'Latitude', lon = 'Longitude', zoom = 5, hover_name = 'District', hover_data = [first_parameter, second_parameter] ,mapbox_style ='carto-positron', size = first_parameter, color = second_parameter, width = 1400, height = 700, title = f'India Census 2011: {first_parameter} vs {second_parameter} for {selected_state}', size_max = 25)
-        
-        st.plotly_chart(fig, use_container_width = True)
+        fig = px.scatter_mapbox(state_data, lat='Latitude', lon='Longitude', zoom=5, hover_name='District',
+                                hover_data=[first_parameter, second_parameter], mapbox_style='carto-positron',
+                                size=first_parameter, color=second_parameter, width=1400, height=700,
+                                title=f'India Census 2011: {first_parameter} vs {second_parameter} for {selected_state}',
+                                size_max=25)
+
+        st.plotly_chart(fig, use_container_width=True)
